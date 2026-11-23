@@ -1,0 +1,27 @@
+package pe.edu.senati.citas_api.auth.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
+import pe.edu.senati.citas_api.auth.dto.LoginDTO;
+import pe.edu.senati.citas_api.auth.dto.SesionDTO;
+import pe.edu.senati.citas_api.auth.service.AuthService;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService service;
+
+    public AuthController(AuthService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/login")
+    public SesionDTO login(@Valid @RequestBody LoginDTO dto) {
+        return service.login(dto);
+    }
+}
