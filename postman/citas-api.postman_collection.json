@@ -1,0 +1,1043 @@
+{
+  "info": {
+    "name": "citas-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59007561",
+    "_collection_link": "https://go.postman.co/collection/59007561-7275f24d-428b-4211-a23e-0cbb0961321b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "main",
+      "item": [
+        {
+          "name": "Inicio local",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          }
+        },
+        {
+          "name": "Inicio Codespaces",
+          "request": {
+            "method": "GET",
+            "url": "{{urlCodeSpace}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rama 1 · login y servicios",
+      "item": [
+        {
+          "name": "01. Login gerente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"gerente@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "02. Login admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "03. Login contraseña incorrecta",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"gerente@terapias.pe\",\r\n  \"password\": \"otra\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 401."
+          },
+          "response": []
+        },
+        {
+          "name": "04. Login correo inexistente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"nadie@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 401."
+          },
+          "response": []
+        },
+        {
+          "name": "05. Login usuario inactivo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"diego.ramirez@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 403."
+          },
+          "response": []
+        },
+        {
+          "name": "06. Login rol no permitido (cliente)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ana.quispe@correo.com\",\n  \"password\": \"Clave123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 403."
+          },
+          "response": []
+        },
+        {
+          "name": "07. Login sin datos",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 400."
+          },
+          "response": []
+        },
+        {
+          "name": "08. Listar Servicios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "09. Servicios activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/activos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "activos"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "10. Servicios: buscar por título",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/buscar?titulo=terapia",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "buscar"
+              ],
+              "query": [
+                {
+                  "key": "titulo",
+                  "value": "terapia"
+                }
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "11. Servicios: obtener 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "1"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "12. Servicios: obtener 999",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "999"
+              ]
+            },
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        },
+        {
+          "name": "13. Servicios: crear",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 201."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.collectionVariables.set(\"servicioIdLocal\", String(pm.response.json().id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14. Servicios: crear titulo repetido",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 409."
+          },
+          "response": []
+        },
+        {
+          "name": "15. Servicios: crear inválido",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"\",\n  \"costo\": -5,\n  \"duracion\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 400."
+          },
+          "response": []
+        },
+        {
+          "name": "16. Servicios: actualizar el creado",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 90,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/servicios/{{servicioIdLocal}}",
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "17. Servicios: actualizar 999",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "999"
+              ]
+            },
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        },
+        {
+          "name": "18. Servicios: eliminar 1 en uso",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "1"
+              ]
+            },
+            "description": "Estado esperado: 409."
+          },
+          "response": []
+        },
+        {
+          "name": "19. Servicios: eliminar el creado",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicios/{{servicioIdLocal}}",
+            "description": "Estado esperado: 204."
+          },
+          "response": []
+        },
+        {
+          "name": "20. Servicios: eliminar otra vez",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/servicios/{{servicioIdLocal}}",
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Codespaces · rama 1 · login y servicios",
+      "item": [
+        {
+          "name": "01. Login gerente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"gerente@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "02. Login admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "03. Login contraseña incorrecta",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"gerente@terapias.pe\",\r\n  \"password\": \"otra\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 401."
+          },
+          "response": []
+        },
+        {
+          "name": "04. Login correo inexistente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"nadie@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 401."
+          },
+          "response": []
+        },
+        {
+          "name": "05. Login usuario inactivo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"diego.ramirez@terapias.pe\",\r\n  \"password\": \"Clave123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 403."
+          },
+          "response": []
+        },
+        {
+          "name": "06. Login rol no permitido (cliente)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ana.quispe@correo.com\",\n  \"password\": \"Clave123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 403."
+          },
+          "response": []
+        },
+        {
+          "name": "07. Login sin datos",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/auth/login",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Estado esperado: 400."
+          },
+          "response": []
+        },
+        {
+          "name": "08. Listar Servicios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "09. Servicios activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/activos",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "activos"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "10. Servicios: buscar por título",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/buscar?titulo=terapia",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "buscar"
+              ],
+              "query": [
+                {
+                  "key": "titulo",
+                  "value": "terapia"
+                }
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "11. Servicios: obtener 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/1",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "1"
+              ]
+            },
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "12. Servicios: obtener 999",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/999",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "999"
+              ]
+            },
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        },
+        {
+          "name": "13. Servicios: crear",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 201."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.collectionVariables.set(\"servicioIdCodespace\", String(pm.response.json().id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14. Servicios: crear titulo repetido",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 409."
+          },
+          "response": []
+        },
+        {
+          "name": "15. Servicios: crear inválido",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"\",\n  \"costo\": -5,\n  \"duracion\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            },
+            "description": "Estado esperado: 400."
+          },
+          "response": []
+        },
+        {
+          "name": "16. Servicios: actualizar el creado",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 90,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlCodeSpace}}/api/servicios/{{servicioIdCodespace}}",
+            "description": "Estado esperado: 200."
+          },
+          "response": []
+        },
+        {
+          "name": "17. Servicios: actualizar 999",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Reflexología\",\n  \"descripcion\": \"Masaje en puntos de los pies\",\n  \"costo\": 85.0,\n  \"duracion\": 40,\n  \"foto\": null,\n  \"activo\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/999",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "999"
+              ]
+            },
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        },
+        {
+          "name": "18. Servicios: eliminar 1 en uso",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{urlCodeSpace}}/api/servicios/1",
+              "host": [
+                "{{urlCodeSpace}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "1"
+              ]
+            },
+            "description": "Estado esperado: 409."
+          },
+          "response": []
+        },
+        {
+          "name": "19. Servicios: eliminar el creado",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{urlCodeSpace}}/api/servicios/{{servicioIdCodespace}}",
+            "description": "Estado esperado: 204."
+          },
+          "response": []
+        },
+        {
+          "name": "20. Servicios: eliminar otra vez",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{urlCodeSpace}}/api/servicios/{{servicioIdCodespace}}",
+            "description": "Estado esperado: 404."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "urlCodeSpace",
+      "value": "https://upgraded-space-parakeet-69jwjj7grgj43rvwx-8080.app.github.dev"
+    },
+    {
+      "key": "servicioIdLocal",
+      "value": ""
+    },
+    {
+      "key": "servicioIdCodespace",
+      "value": ""
+    }
+  ]
+}
